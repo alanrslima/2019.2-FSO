@@ -38,14 +38,10 @@ int main()
   idProcesso = fork();
 
   switch (idProcesso) {
-    case -1: 
-      exit(-1); // ERROR
     case 0: // Processo "P2"
       printf("[LOG] Sou o processo P2: %d  |  Meu pai P1: %d\n", getpid(), getppid());
       idProcesso = fork();
       switch (idProcesso) {
-        case -1:
-          exit(-1); 
         case 0: // Processo "P4"
           removeLowercase(string);
           printf("[LOG] Sou o processo P4: %d  |  Meu pai P2: %d\n", getpid(), getppid());
@@ -53,17 +49,12 @@ int main()
         default: // Continua em "P2"
           idProcesso = fork(); // Processo "P5"
           switch (idProcesso) {
-            case -1:
-              exit(-1); //ERROR
             case 0:  // P5
               printf("[LOG] Sou o processo P5: %d  |  Meu pai é P2: %d\n", getpid(), getppid());
               break;
             default: // Continue P5
-
               idProcesso = fork(); // Processo "P6"
               switch (idProcesso) {
-                case -1:
-                  exit(-1); // ERROR
                 case 0: // P6
                   removeVogals(string);
                   printf("[LOG] Sou o processo P6: %d  |  Meu pai é P2: %d\n", getpid(), getppid());
