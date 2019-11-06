@@ -13,8 +13,8 @@ void trata_sinal( int sig )
 
 int main() {
  // instala handler para SIGINT pela primeira vez
- printf("Meu pID é %d", getpid());
+//  printf("Meu pID é %d", getpid());
  signal( SIGINT, trata_sinal );
 //  while(1)
-  // pause();
+//   pause();
 };

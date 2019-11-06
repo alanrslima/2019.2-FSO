@@ -5,19 +5,17 @@
 
 int main()
 { 
-  pid_t r;
-  /* fork another process */
+  int r, pid, s;
   r = fork();
-  if (r < 0) { /* error occurred */
-    fprintf(stderr, "Fork Failed");
+  if (r < 0){
+    fprintf(stderr, "Fork failed\n");
     exit(-1);
-  } else if (r == 0) { /* child process */
-    execlp("/bin/ls", "ls", NULL);
-  } else { /* parent process */
-  /* parent will wait for the child to
-  complete */
-    wait (NULL);
-    printf ("Child Complete");
-    exit(0);  
-  };
+  } else if (r == 0){
+    printf("Sou o filho com PID: %d, meu pai tem PID: %d\n", getpid(), getppid());
+  } else {
+    printf("Sou o processo pai com PID: %d, criei um filho com PID: %d\n", getpid(), r);
+    pid = wait(&s);
+    printf("Meu filho com pid %d terminou com status %d\n", pid, s);
+    exit(0);
+  }
 };
